@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Pomoc Drogowa Katowice 24/7 – SOSAutoPomoc</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#e63329;
+  --red2:#ff4a3f;
+  --red-light:#fff0ef;
+  --yellow:#f5c518;
+  --black:#111;
+  --white:#ffffff;
+  --gray:#f7f8fa;
+  --gray2:#eef0f3;
+  --text:#1a1a2e;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;font-weight:400;background:var(--white);color:var(--text);overflow-x:hidden;line-height:1.6;}
+
+/* ══════════ STICKY NAV + DROPDOWN ══════════ */
+nav{
+  position:sticky;top:0;z-index:500;
+  background:#fff;
+  box-shadow:0 2px 20px rgba(0,0,0,.08);
+}
+.nav-top{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.9rem 2rem;
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-size:1.5rem;font-weight:800;letter-spacing:.02em;color:var(--text);
+  text-decoration:none;
+}
+.nav-logo span{color:var(--red);}
+.nav-phone-top{
+  display:flex;align-items:center;gap:.5rem;
+  background:var(--red);color:#fff;
+  padding:.55rem 1.4rem;border-radius:50px;
+  font-size:.9rem;font-weight:700;text-decoration:none;
+  transition:background .2s,transform .2s;
+}
+.nav-phone-top:hover{background:var(--red2);transform:scale(1.03);}
+
+/* hamburger menu bar */
+.nav-menu-bar{
+  display:flex;align-items:center;gap:0;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.nav-menu-bar::-webkit-scrollbar{display:none;}
+.nav-menu-item{
+  position:relative;
+  flex-shrink:0;
+}
+.nav-menu-btn{
+  display:flex;align-items:center;gap:.4rem;
+  background:none;border:none;
+  color:var(--muted);
+  font-family:'Outfit',sans-serif;
+  font-size:.82rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:1rem 1.2rem;
+  cursor:pointer;
+  transition:color .2s,background .2s;
+  white-space:nowrap;
+}
+.nav-menu-btn:hover,.nav-menu-item.open .nav-menu-btn{
+  color:var(--text);background:var(--gray);
+}
+.nav-menu-btn .arrow{
+  font-size:.6rem;opacity:.6;
+  transition:transform .3s;display:inline-block;
+}
+.nav-menu-item.open .nav-menu-btn .arrow{transform:rotate(180deg);}
+.nav-menu-btn.active{color:var(--text);border-bottom:2px solid var(--red);}
+
+/* dropdown panel */
+.dropdown{
+  position:absolute;top:100%;left:0;
+  min-width:240px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-top:3px solid var(--red);
+  border-radius:0 0 10px 10px;
+  box-shadow:0 16px 40px rgba(0,0,0,.12);
+  opacity:0;visibility:hidden;
+  transform:translateY(-8px);
+  transition:opacity .25s,transform .25s,visibility .25s;
+  z-index:600;
+}
+.nav-menu-item.open .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+.dropdown a{
+  display:flex;align-items:center;gap:.8rem;
+  padding:.85rem 1.4rem;
+  font-size:.88rem;font-weight:500;
+  color:var(--text);text-decoration:none;
+  border-bottom:1px solid var(--border);
+  transition:background .2s,color .2s;
+}
+.dropdown a:last-child{border-bottom:none;}
+.dropdown a:hover{background:var(--red-light);color:var(--red);}
+.dropdown a .d-icon{font-size:1rem;flex-shrink:0;}
+
+/* big call button in bar */
+.nav-call-bar{
+  margin-left:auto;
+  display:flex;align-items:center;gap:.5rem;
+  color:var(--red);
+  font-size:.88rem;font-weight:700;
+  letter-spacing:.04em;
+  padding:0 0 0 1.5rem;
+  white-space:nowrap;
+  text-decoration:none;
+  flex-shrink:0;
+}
+.nav-call-bar:hover{color:var(--red2);}
+.pulse-icon{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--yellow);
+  animation:pulse 1.5s infinite;
+  flex-shrink:0;
+}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(245,197,24,.5);}70%{box-shadow:0 0 0 8px rgba(245,197,24,0);}}
+
+/* ══════════ TOPBAR ══════════ */
+.topbar{
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  padding:.5rem 2rem;
+  display:flex;justify-content:center;align-items:center;
+  gap:2rem;flex-wrap:wrap;
+}
+.topbar-item{
+  display:flex;align-items:center;gap:.4rem;
+  font-size:.78rem;font-weight:500;
+  color:var(--muted);
+}
+.topbar-item a{color:var(--muted);text-decoration:none;}
+.topbar-item a:hover{color:var(--red);}
+.topbar-item strong{color:var(--text);}
+
+/* ══════════ HERO ══════════ */
+.hero{
+  background:var(--white);
+  position:relative;overflow:hidden;
+}
+.hero-accent{
+  position:absolute;top:0;right:0;
+  width:55%;height:100%;
+  background:linear-gradient(135deg,var(--red) 0%,#b82920 100%);
+  clip-path:polygon(15% 0%,100% 0%,100% 100%,0% 100%);
+}
+.hero-inner{
+  position:relative;z-index:1;
+  max-width:1200px;margin:0 auto;
+  padding:5rem 2rem;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;align-items:center;
+  min-height:88vh;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--red-light);border:1px solid rgba(230,51,41,.2);
+  border-radius:4px;padding:.3rem .9rem;
+  font-size:.72rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--red);
+  margin-bottom:1.5rem;
+}
+.hero h1{
+  font-size:clamp(2.8rem,5.5vw,5rem);
+  font-weight:900;line-height:1.0;
+  color:var(--text);margin-bottom:1.5rem;
+  letter-spacing:-.02em;
+}
+.hero h1 .red{color:var(--red);}
+.hero-desc{
+  font-size:1.05rem;line-height:1.8;
+  color:var(--muted);max-width:480px;margin-bottom:2rem;
+}
+.hero-rating{
+  display:flex;align-items:center;gap:.8rem;margin-bottom:2.5rem;
+}
+.stars{color:var(--yellow);font-size:1.1rem;letter-spacing:2px;}
+.hero-rating span{font-size:.88rem;color:var(--muted);}
+.hero-rating strong{color:var(--text);}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-red{
+  padding:1rem 2.2rem;background:var(--red);color:#fff;
+  border-radius:6px;font-size:.95rem;font-weight:700;
+  text-decoration:none;letter-spacing:.04em;
+  transition:background .2s,transform .2s,box-shadow .2s;
+  display:inline-block;
+}
+.btn-red:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(230,51,41,.3);}
+.btn-outline-dark{
+  padding:1rem 2.2rem;border:2px solid var(--text);color:var(--text);
+  border-radius:6px;font-size:.95rem;font-weight:600;
+  text-decoration:none;letter-spacing:.04em;
+  transition:background .2s,transform .2s;display:inline-block;
+}
+.btn-outline-dark:hover{background:var(--text);color:#fff;transform:translateY(-2px);}
+
+/* hero right side */
+.hero-right{display:flex;flex-direction:column;gap:1rem;}
+.hero-stat-card{
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:10px;padding:1.5rem 2rem;
+  display:flex;align-items:center;gap:1.2rem;
+  transition:transform .3s;
+}
+.hero-stat-card:hover{transform:translateX(-4px);}
+.hsc-icon{font-size:2rem;flex-shrink:0;}
+.hsc-num{font-size:1.9rem;font-weight:900;color:#fff;line-height:1;}
+.hsc-label{font-size:.8rem;color:rgba(255,255,255,.75);margin-top:.15rem;}
+
+/* ══════════ STRIP ══════════ */
+.strip{
+  background:var(--gray);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:1.2rem 2rem;
+  display:flex;justify-content:center;align-items:center;
+  gap:3rem;flex-wrap:wrap;
+}
+.strip-item{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.85rem;font-weight:600;color:var(--text);
+}
+.strip-item .dot{width:8px;height:8px;border-radius:50%;background:var(--red);}
+
+/* ══════════ SECTIONS ══════════ */
+section{padding:5rem 2rem;}
+.sec-inner{max-width:1200px;margin:0 auto;}
+.sec-tag{
+  font-size:.7rem;font-weight:700;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--red);margin-bottom:.5rem;
+}
+.sec-title{
+  font-size:clamp(1.8rem,3.5vw,3rem);font-weight:800;
+  line-height:1.1;letter-spacing:-.02em;margin-bottom:.5rem;
+}
+.sec-sub{font-size:1rem;color:var(--muted);margin-bottom:3rem;max-width:600px;}
+
+/* ══════════ STEPS ══════════ */
+.steps-bg{background:var(--gray);}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem;}
+.step-card{
+  background:#fff;border-radius:12px;padding:2.5rem 2rem;
+  border:1px solid var(--border);
+  position:relative;overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+}
+.step-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.08);}
+.step-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--red),var(--red2));
+}
+.step-num{
+  font-size:5rem;font-weight:900;line-height:1;
+  color:rgba(230,51,41,.07);margin-bottom:1rem;
+  transition:color .3s;
+}
+.step-card:hover .step-num{color:rgba(230,51,41,.13);}
+.step-card h3{font-size:1.2rem;font-weight:700;margin-bottom:.7rem;}
+.step-card p{font-size:.92rem;line-height:1.75;color:var(--muted);}
+
+/* ══════════ OFFER ══════════ */
+.offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2.5rem;align-items:start;}
+.offer-img-wrap img{width:100%;border-radius:12px;display:block;box-shadow:0 20px 60px rgba(0,0,0,.12);}
+.offer-badges{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1rem;}
+.badge{
+  background:var(--gray);border:1px solid var(--border);
+  border-radius:6px;padding:.45rem .9rem;
+  font-size:.78rem;font-weight:600;color:var(--text);
+  display:flex;align-items:center;gap:.35rem;
+}
+.offer-blocks{display:flex;flex-direction:column;gap:1rem;}
+.ob{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:10px;overflow:hidden;
+  transition:border-color .3s;
+}
+.ob:hover{border-color:rgba(230,51,41,.3);}
+.ob-head{
+  display:flex;align-items:center;gap:.8rem;
+  padding:1.2rem 1.5rem;cursor:pointer;
+  background:var(--gray);
+}
+.ob-num{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--red);color:#fff;
+  font-size:.75rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.ob-head h3{font-size:.95rem;font-weight:700;flex:1;}
+.ob-toggle{color:var(--red);font-size:1.1rem;transition:transform .3s;}
+.ob.open .ob-toggle{transform:rotate(45deg);}
+.ob-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1);}
+.ob.open .ob-body{max-height:500px;}
+.ob-body ul{list-style:none;padding:1rem 1.5rem 1.2rem;display:flex;flex-direction:column;gap:.45rem;}
+.ob-body li{font-size:.88rem;color:var(--muted);padding-left:1.1rem;position:relative;line-height:1.5;}
+.ob-body li::before{content:'→';position:absolute;left:0;color:var(--red);font-size:.8rem;}
+
+/* guarantees */
+.guarantees{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem;}
+.guar{
+  background:var(--gray);border-radius:10px;padding:1.8rem;
+  text-align:center;border:1px solid var(--border);
+  transition:transform .3s,border-color .3s;
+}
+.guar:hover{transform:translateY(-3px);border-color:rgba(230,51,41,.25);}
+.guar-icon{font-size:2rem;margin-bottom:.7rem;}
+.guar h4{font-size:.95rem;font-weight:700;margin-bottom:.3rem;}
+.guar p{font-size:.85rem;color:var(--muted);line-height:1.6;}
+
+/* ══════════ ABOUT ══════════ */
+.about-bg{background:#fff;border-top:1px solid var(--border);}
+.about-bg .sec-title{color:var(--text);}
+.about-bg .sec-tag{color:var(--red);}
+.about-bg .sec-sub{color:var(--muted);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:2.5rem;}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:12px;overflow:hidden;}
+.astat{background:var(--gray);padding:2rem;text-align:center;}
+.astat-num{font-size:3rem;font-weight:900;color:var(--red);line-height:1;}
+.astat-label{font-size:.75rem;color:var(--muted);margin-top:.3rem;letter-spacing:.06em;}
+.about-quote{
+  font-style:italic;font-size:1.25rem;font-weight:300;
+  line-height:1.65;color:var(--text);
+  border-left:3px solid var(--red);padding-left:1.4rem;
+  margin:2rem 0 1rem;
+}
+.about-author{font-size:.82rem;font-weight:700;color:var(--red);letter-spacing:.1em;text-transform:uppercase;}
+.about-right p{font-size:.97rem;line-height:1.85;color:var(--muted);margin-bottom:1rem;}
+.about-right p strong{color:var(--text);}
+.fleet{display:flex;flex-direction:column;gap:.6rem;margin-top:1.2rem;}
+.fleet-item{display:flex;align-items:center;gap:.7rem;font-size:.9rem;color:var(--muted);}
+.fleet-item::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0;}
+
+/* ══════════ GALLERY ══════════ */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-template-rows:auto auto;
+  gap:8px;margin-top:2.5rem;
+}
+.gi{overflow:hidden;border-radius:8px;position:relative;}
+.gi:first-child{grid-column:span 2;grid-row:span 2;}
+.gi img{width:100%;height:100%;object-fit:cover;transition:transform .5s;display:block;}
+.gi:not(:first-child){height:180px;}
+.gi:hover img{transform:scale(1.06);}
+.gi::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.3));
+  opacity:0;transition:opacity .3s;
+}
+.gi:hover::after{opacity:1;}
+
+/* ══════════ REVIEWS ══════════ */
+.reviews-bg{background:var(--gray);}
+.rating-hero{
+  display:flex;align-items:center;gap:2.5rem;
+  background:#fff;border:1px solid var(--border);border-radius:12px;
+  padding:2rem 2.5rem;margin-bottom:2.5rem;flex-wrap:wrap;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+.rating-num{font-size:5.5rem;font-weight:900;line-height:1;color:var(--text);}
+.rating-info .stars{font-size:1.5rem;letter-spacing:3px;}
+.rating-info p{font-size:.88rem;color:var(--muted);margin-top:.3rem;}
+.rating-info a{color:var(--red);font-weight:600;text-decoration:none;}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+.review-card{
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  padding:1.8rem;
+  transition:box-shadow .3s,transform .3s;
+}
+.review-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.08);transform:translateY(-3px);}
+.rc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem;}
+.rc-author{font-weight:700;font-size:.95rem;}
+.rc-source{font-size:.75rem;color:var(--muted);}
+.rc-stars{color:var(--yellow);font-size:.9rem;margin-bottom:.7rem;}
+.rc-text{font-size:.9rem;line-height:1.7;color:var(--muted);}
+.review-card.highlight{background:var(--red-light);border-color:rgba(230,51,41,.2);}
+
+/* ══════════ FAQ ══════════ */
+.faq-list{display:flex;flex-direction:column;gap:.7rem;margin-top:2.5rem;}
+.faq-item{
+  background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;
+  transition:border-color .3s;
+}
+.faq-item.open{border-color:rgba(230,51,41,.3);}
+.faq-q{
+  width:100%;text-align:left;background:none;border:none;
+  padding:1.4rem 1.8rem;
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  cursor:pointer;transition:background .2s;
+}
+.faq-q:hover{background:var(--gray);}
+.faq-q span{font-size:.97rem;font-weight:600;text-align:left;line-height:1.4;}
+.faq-arrow{width:28px;height:28px;border-radius:50%;background:var(--red-light);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;flex-shrink:0;transition:transform .3s,background .3s;}
+.faq-item.open .faq-arrow{transform:rotate(45deg);background:var(--red);color:#fff;}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1);}
+.faq-item.open .faq-a{max-height:400px;}
+.faq-a-inner{padding:.2rem 1.8rem 1.4rem;font-size:.92rem;line-height:1.8;color:var(--muted);}
+
+/* ══════════ CONTACT ══════════ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2.5rem;}
+.contact-cards{display:flex;flex-direction:column;gap:1rem;}
+.cc{
+  background:var(--white);border:1px solid var(--border);border-radius:10px;
+  padding:1.5rem 1.8rem;display:flex;align-items:flex-start;gap:1.1rem;
+  transition:border-color .3s,box-shadow .3s;
+}
+.cc:hover{border-color:rgba(230,51,41,.25);box-shadow:0 4px 16px rgba(0,0,0,.06);}
+.cc-icon{font-size:1.5rem;flex-shrink:0;}
+.cc-label{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:.25rem;}
+.cc-val{font-size:1rem;font-weight:600;}
+.cc-val a{color:var(--text);text-decoration:none;}
+.cc-val a:hover{color:var(--red);}
+.cc-sub{font-size:.8rem;color:var(--muted);margin-top:.1rem;}
+.hours-card{background:var(--gray);border:1px solid var(--border);border-radius:10px;padding:1.5rem 1.8rem;}
+.hours-title{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;}
+.h-row{display:flex;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid var(--border);font-size:.9rem;}
+.h-row:last-child{border-bottom:none;}
+.h-row.always{font-weight:700;color:var(--text);}
+.badge-247{background:var(--red);color:#fff;font-size:.68rem;font-weight:700;padding:.15rem .5rem;border-radius:4px;}
+.map-wrap{height:200px;border-radius:10px;overflow:hidden;margin-top:1rem;border:1px solid var(--border);}
+.map-wrap iframe{width:100%;height:100%;border:none;}
+
+/* form */
+.contact-form{
+  background:var(--white);border:1px solid var(--border);border-radius:12px;
+  padding:2.5rem;box-shadow:0 4px 30px rgba(0,0,0,.06);
+  position:relative;overflow:hidden;
+}
+.contact-form::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--red),var(--red2));}
+.contact-form h3{font-size:1.4rem;font-weight:800;margin-bottom:.3rem;}
+.contact-form p{font-size:.88rem;color:var(--muted);margin-bottom:1.8rem;}
+.fg{margin-bottom:1.1rem;}
+.fg label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;}
+.fg input,.fg textarea{
+  width:100%;background:var(--gray);border:1px solid var(--border);
+  border-radius:7px;padding:.85rem 1rem;
+  font-family:'Outfit',sans-serif;font-size:.95rem;color:var(--text);
+  outline:none;transition:border-color .2s,background .2s;
+}
+.fg input:focus,.fg textarea:focus{border-color:var(--red);background:#fff;}
+.fg textarea{height:110px;resize:vertical;}
+.form-submit{
+  width:100%;background:var(--red);color:#fff;border:none;
+  border-radius:7px;padding:1rem;
+  font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;
+  letter-spacing:.06em;cursor:pointer;
+  transition:background .2s,transform .2s;
+}
+.form-submit:hover{background:var(--red2);transform:translateY(-1px);}
+
+/* ══════════ CTA BOTTOM ══════════ */
+.cta-bottom{
+  background:var(--red);padding:5rem 2rem;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-bottom::before{
+  content:'SOS';font-family:'Outfit',sans-serif;font-weight:900;
+  font-size:22rem;line-height:1;
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  color:rgba(0,0,0,.08);pointer-events:none;letter-spacing:.1em;
+}
+.cta-bottom h2{
+  font-size:clamp(2.2rem,5vw,4.5rem);font-weight:900;
+  color:#fff;line-height:1.05;margin-bottom:1rem;
+  position:relative;letter-spacing:-.02em;
+}
+.cta-bottom p{
+  font-size:1.05rem;color:rgba(255,255,255,.8);
+  max-width:500px;margin:0 auto 2.5rem;position:relative;
+}
+.btn-white{
+  background:#fff;color:var(--red);padding:1.1rem 3rem;
+  border-radius:6px;font-size:1rem;font-weight:700;
+  letter-spacing:.06em;text-decoration:none;
+  transition:transform .2s,box-shadow .2s;display:inline-block;
+  position:relative;
+}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 12px 35px rgba(0,0,0,.2);}
+
+/* ══════════ FOOTER ══════════ */
+footer{background:#fff;border-top:1px solid var(--border);padding:4rem 2rem 2rem;}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+.footer-logo{font-size:1.5rem;font-weight:800;color:var(--text);margin-bottom:.8rem;}
+.footer-logo span{color:var(--red);}
+.footer-brand p{font-size:.88rem;color:var(--muted);line-height:1.75;max-width:260px;}
+.footer-col h4{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.footer-col ul li a{font-size:.88rem;color:var(--muted);text-decoration:none;transition:color .2s;}
+.footer-col ul li a:hover{color:var(--red);}
+.footer-bottom{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-bottom p{font-size:.78rem;color:var(--muted);}
+
+/* ══════════ COOKIE ══════════ */
+.cookie{
+  position:fixed;bottom:1.2rem;left:1.2rem;right:1.2rem;
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  padding:1.2rem 1.8rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  z-index:999;flex-wrap:wrap;
+  box-shadow:0 10px 40px rgba(0,0,0,.12);
+}
+.cookie p{font-size:.85rem;color:var(--muted);}
+.cookie-btn{background:var(--red);color:#fff;border:none;border-radius:5px;padding:.55rem 1.4rem;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;}
+
+/* ══════════ REVEAL ══════════ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1);}
+.reveal.vis{opacity:1;transform:translateY(0);}
+
+/* ══════════ RESPONSIVE ══════════ */
+@media(max-width:1024px){
+  .hero-inner,.offer-grid,.about-grid,.contact-grid,.footer-top{grid-template-columns:1fr;}
+  .hero-accent{display:none;}
+  .hero-inner{min-height:auto;padding:4rem 2rem;}
+  .hero-right{flex-direction:row;flex-wrap:wrap;}
+  .hero-stat-card{flex:1;min-width:200px;background:var(--gray);border-color:var(--border);}
+  .hsc-num{color:var(--red);}
+  .hsc-label{color:var(--muted);}
+}
+@media(max-width:768px){
+  .steps-grid,.reviews-grid,.guarantees{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .gi:first-child{grid-column:span 2;grid-row:span 1;}
+  .gi:not(:first-child){height:150px;}
+  .about-stats{grid-template-columns:1fr 1fr;}
+  .footer-top{grid-template-columns:1fr;}
+  .topbar{gap:1rem;}
+  .nav-menu-bar{padding:0 .5rem;}
+  .nav-call-bar{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-item">📞 <a href="tel:+48500505804">+48 500 505 804</a></div>
+  <div class="topbar-item">✉ <a href="mailto:auto.komis@poczta.fm">auto.komis@poczta.fm</a></div>
+  <div class="topbar-item">📍 al. W. Roździeńskiego 170, Katowice</div>
+  <div class="topbar-item">🟢 Czynne <strong>24/7</strong></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-top">
+    <a href="#" class="nav-logo"><span>SOS</span>AutoPomoc</a>
+    <a href="tel:+48500505804" class="nav-phone-top">📞 Zadzwoń teraz</a>
+  </div>
+  <div class="nav-menu-bar">
+
+    <!-- Oferta dropdown -->
+    <div class="nav-menu-item" id="menu-oferta">
+      <button class="nav-menu-btn">Oferta <span class="arrow">▼</span></button>
+      <div class="dropdown">
+        <a href="#ob-holowanie"><span class="d-icon">🚗</span> Holowanie i transport</a>
+        <a href="#ob-awarie"><span class="d-icon">🔧</span> Pomoc w awariach</a>
+        <a href="#ob-transport"><span class="d-icon">🚛</span> Transport specjalistyczny</a>
+        <a href="#ob-assistance"><span class="d-icon">🤝</span> Usługi assistance</a>
+        <a href="#ob-naprawy"><span class="d-icon">⚙</span> Drobne naprawy mechaniczne</a>
+      </div>
+    </div>
+
+    <!-- Jak działamy dropdown -->
+    <div class="nav-menu-item" id="menu-jak">
+      <button class="nav-menu-btn">Jak działamy <span class="arrow">▼</span></button>
+      <div class="dropdown">
+        <a href="#jak-dzialamy"><span class="d-icon">📞</span> Konsultacja i diagnoza</a>
+        <a href="#jak-dzialamy"><span class="d-icon">⚡</span> Sprawna usługa</a>
+        <a href="#jak-dzialamy"><span class="d-icon">🧾</span> Legalność i ubezpieczenie</a>
+      </div>
+    </div>
+
+    <!-- O firmie dropdown -->
+    <div class="nav-menu-item" id="menu-firma">
+      <button class="nav-menu-btn">O firmie <span class="arrow">▼</span></button>
+      <div class="dropdown">
+        <a href="#o-firmie"><span class="d-icon">🏆</span> Historia i misja</a>
+        <a href="#o-firmie"><span class="d-icon">🚐</span> Flota i sprzęt</a>
+      </div>
+    </div>
+
+    <!-- Opinie -->
+    <div class="nav-menu-item" id="menu-opinie">
+      <button class="nav-menu-btn">Opinie <span class="arrow">▼</span></button>
+      <div class="dropdown">
+        <a href="#opinie"><span class="d-icon">⭐</span> Opinie klientów</a>
+        <a href="https://maps.app.goo.gl/h6cKEcqXu4aTB3WZ9" target="_blank"><span class="d-icon">📝</span> Napisz opinię</a>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="nav-menu-item" id="menu-faq">
+      <button class="nav-menu-btn">FAQ <span class="arrow">▼</span></button>
+      <div class="dropdown">
+        <a href="#faq"><span class="d-icon">❓</span> Czas dojazdu</a>
+        <a href="#faq"><span class="d-icon">🔑</span> Auto nie odpala</a>
+        <a href="#faq"><span class="d-icon">🛡</span> Bezpieczeństwo holowania</a>
+        <a href="#faq"><span class="d-icon">🧾</span> Faktura VAT</a>
+        <a href="#faq"><span class="d-icon">🔧</span> Transport do warsztatu</a>
+      </div>
+    </div>
+
+    <!-- Kontakt -->
+    <div class="nav-menu-item" id="menu-kontakt">
+      <button class="nav-menu-btn">Kontakt <span class="arrow">▼</span></button>
+      <div class="dropdown">
+        <a href="#kontakt"><span class="d-icon">📞</span> Telefon i e-mail</a>
+        <a href="#kontakt"><span class="d-icon">📍</span> Adres i mapa</a>
+      </div>
+    </div>
+
+    <a href="tel:+48500505804" class="nav-call-bar">
+      <span class="pulse-icon"></span>
+      Dostępni teraz · 500 505 804
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-accent"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">⚡ Pomoc drogowa · Katowice i okolice</div>
+      <h1>Pomoc drogowa<br><span class="red">24/7</span><br>Katowice</h1>
+      <p class="hero-desc">Usługi pomocy drogowej dostępne całą dobę. Dzięki ponad <strong>25-letniemu doświadczeniu</strong> i zespołowi 3 specjalistów — szybka i skuteczna pomoc zawsze gdy jej potrzebujesz.</p>
+      <div class="hero-rating">
+        <span class="stars">★★★★★</span>
+        <strong>5.0</strong>
+        <span>— ponad 170 opinii w Google</span>
+      </div>
+      <div class="hero-btns">
+        <a href="tel:+48500505804" class="btn-red">📞 Zadzwoń: 500 505 804</a>
+        <a href="#kontakt" class="btn-outline-dark">Zamów rozmowę</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat-card">
+        <div class="hsc-icon">⚡</div>
+        <div><div class="hsc-num">15 min</div><div class="hsc-label">Średni czas dojazdu</div></div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hsc-icon">🏆</div>
+        <div><div class="hsc-num">25 lat</div><div class="hsc-label">Doświadczenia</div></div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hsc-icon">🚗</div>
+        <div><div class="hsc-num">3 pojazdy</div><div class="hsc-label">W stałej gotowości</div></div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hsc-icon">⭐</div>
+        <div><div class="hsc-num">5.0 / 170+</div><div class="hsc-label">Ocena Google</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item"><span class="dot"></span> Uczciwe ceny</div>
+  <div class="strip-item"><span class="dot"></span> Pełne ubezpieczenie PZU</div>
+  <div class="strip-item"><span class="dot"></span> Paragon lub faktura VAT</div>
+  <div class="strip-item"><span class="dot"></span> Czynni całą dobę</div>
+</div>
+
+<!-- STEPS -->
+<section class="steps-bg" id="jak-dzialamy">
+  <div class="sec-inner">
+    <div class="sec-tag reveal">Jak działamy</div>
+    <h2 class="sec-title reveal">Pomoc w 3 krokach</h2>
+    <p class="sec-sub reveal">Bez względu na to, czy potrzebujesz szybkiej wymiany koła, czy holowania — wszystko nawet w ciągu <strong>15 minut</strong>.</p>
+    <div class="steps-grid reveal">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Konsultacja i diagnoza</h3>
+        <p>Twój czas jest cenny, dlatego oferujemy błyskawiczną diagnozę i wstępną wycenę już podczas pierwszej rozmowy. W razie poważnej awarii wyjeżdżamy już w ciągu <strong>5 minut od wezwania</strong>.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Sprawna usługa</h3>
+        <p>Zajmujemy się każdą usterką — od drobnych po pomoc w dużych wypadkach. Zawsze działamy skutecznie i bez zbędnych formalności. <strong>3 pracowników, 3 pojazdy, najnowszy sprzęt.</strong></p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Legalność i ubezpieczenie</h3>
+        <p>Każda usługa potwierdzona paragonem lub fakturą. Firma jest <strong>w pełni ubezpieczona (PZU S.A.)</strong> — współpracujemy z czołowymi towarzystwami i korzystamy z certyfikowanego sprzętu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section id="oferta">
+  <div class="sec-inner">
+    <div class="sec-tag reveal">Zakres usług</div>
+    <h2 class="sec-title reveal">Nasza oferta</h2>
+    <p class="sec-sub reveal">Firma <strong>„RAFAŁ BOROŃCZYK"</strong> dostarcza profesjonalne usługi pomocy drogowej — szybkie, rzetelne i dostępnie cenowe.</p>
+    <div class="offer-badges" style="margin-top:0;margin-bottom:1.5rem;">
+      <div class="badge">🛡 Pełne ubezpieczenie PZU</div>
+      <div class="badge">⚡ Przyjazd w 15 min</div>
+      <div class="badge">📞 Wycena przez telefon</div>
+    </div>
+    <div class="offer-grid reveal" style="grid-template-columns:1fr;">
+      <div class="offer-blocks">
+        <div class="ob open" id="ob-holowanie">
+          <div class="ob-head"><div class="ob-num">1</div><h3>Holowanie i transport pojazdów</h3><span class="ob-toggle">+</span></div>
+          <div class="ob-body"><ul>
+            <li>Holowanie samochodów osobowych, dostawczych i motocykli</li>
+            <li>Transport pojazdów powypadkowych</li>
+            <li>Holowanie na krótkie i długie dystanse</li>
+            <li>Transport aut zabytkowych i sportowych</li>
+            <li>Przewóz maszyn rolniczych i budowlanych</li>
+          </ul></div>
+        </div>
+        <div class="ob" id="ob-awarie">
+          <div class="ob-head"><div class="ob-num">2</div><h3>Pomoc w awariach na drodze</h3><span class="ob-toggle">+</span></div>
+          <div class="ob-body"><ul>
+            <li>Wymiana kół i dowóz paliwa</li>
+            <li>Awaryjne uruchamianie pojazdów</li>
+            <li>Otwieranie zamków</li>
+            <li>Naprawy na miejscu zdarzenia</li>
+            <li>Uruchamianie z rozładowanym akumulatorem</li>
+            <li>Wymiana żarówek i bezpieczników</li>
+          </ul></div>
+        </div>
+        <div class="ob" id="ob-transport">
+          <div class="ob-head"><div class="ob-num">3</div><h3>Transport specjalistyczny</h3><span class="ob-toggle">+</span></div>
+          <div class="ob-body"><ul>
+            <li>Przewóz pojazdów o niestandardowych gabarytach</li>
+            <li>Transport przyczep kempingowych</li>
+            <li>Holowanie samochodów dostawczych</li>
+            <li>Transport pojazdów luksusowych</li>
+            <li>Transport quadów, skuterów i innych pojazdów</li>
+          </ul></div>
+        </div>
+        <div class="ob" id="ob-assistance">
+          <div class="ob-head"><div class="ob-num">4</div><h3>Usługi assistance</h3><span class="ob-toggle">+</span></div>
+          <div class="ob-body"><ul>
+            <li>Współpraca z towarzystwami ubezpieczeniowymi</li>
+            <li>Holowanie w ramach ubezpieczenia assistance</li>
+            <li>Awaryjne uruchamianie i dowóz paliwa</li>
+            <li>Wsparcie w sytuacjach kryzysowych na drodze</li>
+          </ul></div>
+        </div>
+        <div class="ob" id="ob-naprawy">
+          <div class="ob-head"><div class="ob-num">5</div><h3>Drobne naprawy mechaniczne</h3><span class="ob-toggle">+</span></div>
+          <div class="ob-body"><ul>
+            <li>Wymiana pasków klinowych</li>
+            <li>Naprawa drobnych usterek mechanicznych</li>
+            <li>Wymiana oleju i płynów eksploatacyjnych</li>
+            <li>Wymiana elementów układu elektrycznego</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+    <div class="guarantees reveal">
+      <div class="guar"><div class="guar-icon">🛡</div><h4>Pełne ubezpieczenie OC</h4><p>Ubezpieczenie w PZU obejmujące wszelkie szkody podczas transportu pojazdu.</p></div>
+      <div class="guar"><div class="guar-icon">📋</div><h4>Bez ukrytych kosztów</h4><p>Realizacja usług zgodnie z ustaleniami. Zawsze paragon lub faktura VAT.</p></div>
+      <div class="guar"><div class="guar-icon">🤝</div><h4>PZU, Warta, Allianz, Ergo Hestia</h4><p>Obsługa w ramach Twojej polisy assistance — bez zbędnych formalności.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-bg" id="o-firmie">
+  <div class="sec-inner">
+    <div class="sec-tag reveal">O firmie</div>
+    <h2 class="sec-title reveal">Historia i misja</h2>
+    <div class="about-grid reveal">
+      <div>
+        <div class="about-stats">
+          <div class="astat"><div class="astat-num">25+</div><div class="astat-label">lat doświadczenia</div></div>
+          <div class="astat"><div class="astat-num">3</div><div class="astat-label">pojazdy w gotowości</div></div>
+          <div class="astat"><div class="astat-num">5.0</div><div class="astat-label">ocena w Google</div></div>
+          <div class="astat"><div class="astat-num">15'</div><div class="astat-label">średni czas dojazdu</div></div>
+        </div>
+        <blockquote class="about-quote">„Doskonale zdajemy sobie sprawę, że często ktoś czeka aż dojedziesz i liczy na Ciebie – dzieci, żona, mąż, wspólnik… Nasz zespół to bezkompromisowi fachowcy którzy po prostu załatwią temat."</blockquote>
+        <div class="about-author">— Rafał Borończyk, właściciel firmy</div>
+      </div>
+      <div class="about-right">
+        <p>Nasza firma <strong>„RAFAŁ BOROŃCZYK"</strong> to ponad <strong>25 lat doświadczenia</strong> w branży pomocy drogowej. Zespół <strong>3 wykwalifikowanych pracowników</strong> jest do Twojej dyspozycji <strong>24/7</strong>.</p>
+        <p>Każdy z nas doskonale zna się na swoim fachu — szybka, rzetelna i profesjonalna pomoc w każdej sytuacji na drodze.</p>
+        <p><strong>Sprzęt i flota:</strong></p>
+        <div class="fleet">
+          <div class="fleet-item">3 specjalistyczne lawety marek Iveco i Fiat</div>
+          <div class="fleet-item">Profesjonalne pasy mocujące Kinedyne</div>
+          <div class="fleet-item">Haki i zaczepy Gunnebo</div>
+          <div class="fleet-item">Wyciągarki elektryczne Warn</div>
+          <div class="fleet-item">Pełne ubezpieczenie OC, AC i assistance każdego pojazdu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-bg" id="opinie">
+  <div class="sec-inner">
+    <div class="sec-tag reveal">Opinie klientów</div>
+    <h2 class="sec-title reveal">Co o nas mówią</h2>
+    <div class="rating-hero reveal">
+      <div class="rating-num">5.0</div>
+      <div class="rating-info">
+        <div class="stars">★★★★★</div>
+        <p>Ponad 170 opinii w Google Maps · <a href="https://maps.app.goo.gl/h6cKEcqXu4aTB3WZ9" target="_blank">Sprawdź wszystkie →</a></p>
+      </div>
+    </div>
+    <div class="reviews-grid reveal">
+      <div class="review-card">
+        <div class="rc-top"><div class="rc-author">Bartek P.</div><div class="rc-source">Google</div></div>
+        <div class="rc-stars">★★★★★</div>
+        <div class="rc-text">Pan Rafał to prawdziwy profesjonalista. Gdy mój samochód niespodziewanie się zepsuł, zjawił się błyskawicznie i szybko zdiagnozował problem.</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-top"><div class="rc-author">Szymon P.</div><div class="rc-source">Google</div></div>
+        <div class="rc-stars">★★★★★</div>
+        <div class="rc-text">Niezwykle szybki przyjazd na miejsce, profesjonalny załadunek z miłą obsługą. Polecam każdemu w Katowicach i okolicach.</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-top"><div class="rc-author">Magdalena K.</div><div class="rc-source">Google</div></div>
+        <div class="rc-stars">★★★★★</div>
+        <div class="rc-text">Profesjonalna usługa jak i obsługa na wysokim poziomie, polecam każdemu kto znajdzie się w nietypowej sytuacji na drodze. Tak trzymać 👌</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-top"><div class="rc-author">Grzegorz R.</div><div class="rc-source">Google</div></div>
+        <div class="rc-stars">★★★★★</div>
+        <div class="rc-text">Tanio, szybko, solidnie. Miła obsługa, szybki podjazd i rozwiązanie problemu z moim pojazdem. Polecam wszystkim!</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-top"><div class="rc-author">Mirosław R.</div><div class="rc-source">Google</div></div>
+        <div class="rc-stars">★★★★★</div>
+        <div class="rc-text">Prawdziwy PROFESJONALISTA! Szybki dojazd, kompleksowa pomoc i doradztwo. 100% zadowolenia. POLECAM!!!!!</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-top"><div class="rc-author">Klientka</div><div class="rc-source">Google</div></div>
+        <div class="rc-stars">★★★★★</div>
+        <div class="rc-text">Zdecydowanie polecam! Sobota, wycieczka po Śląsku, dobra pogoda i świetny plan… aż do momentu, gdy auto postanowiło zakończyć podróż przed czasem 😅 Na szczęście trafiliśmy na pomoc drogową, która zamieniła stresującą sytuację w naprawdę pozytywne doświadczenie. Błyskawiczny dojazd, sprawne i bezpieczne holowanie, a do tego pełen profesjonalizm i świetna organizacja. Pan Rafał nie tylko zajął się autem, ale też potrafił rozładować napięcie i poprawić humor po całej przygodzie. Jeśli ktoś szuka rzetelnej, szybkiej i sympatycznej pomocy drogowej – polecam z całego serca! 🚗💛</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-top"><div class="rc-author">Klient</div><div class="rc-source">Google</div></div>
+        <div class="rc-stars">★★★★★</div>
+        <div class="rc-text">Z czystym sumieniem polecam! Bardzo szybka usługa. Cała akcja wykonana w miłym i sympatycznym klimacie. Mega miły i profesjonalny kierowca. Z moim samochodem na pewno skorzystam jeszcze z usług tej Pomocy Drogowej :)</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-top"><div class="rc-author">Klientka</div><div class="rc-source">Google</div></div>
+        <div class="rc-stars">★★★★★</div>
+        <div class="rc-text">Awaria samochodu na A4. Pomoc przybyła niemal że od razu. Pan sprawnie i bezpiecznie zajął się samochodem, wielki plus za spokój i opanowanie, który panował w sytuacji kiedy ja byłam mocno zestresowana. Pełen profesjonalizm, od razu poczułam się w dobrych rękach. Szczerze polecam.</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-top"><div class="rc-author">Klient, Racibórz</div><div class="rc-source">Google</div></div>
+        <div class="rc-stars">★★★★★</div>
+        <div class="rc-text">Polecam Pana od lawety. Dziś swoim spokojem poratował naszą usterkę. Nie polecam usterki w innej miejscowości, jak się nie zna dróg ani gdzie szukać pomocy. Ale dobrze trafiliśmy. Racibórz pozdrawia.</div>
+      </div>
+      <div class="review-card highlight">
+        <div class="rc-top"><div class="rc-author" style="color:var(--red);">Twoja opinia?</div></div>
+        <div class="rc-stars">★★★★★</div>
+        <div class="rc-text">Skorzystałeś z naszych usług? Zostaw opinię w Google — to dla nas najlepsza nagroda.</div>
+        <br>
+        <a href="https://maps.app.goo.gl/h6cKEcqXu4aTB3WZ9" target="_blank" style="color:var(--red);font-weight:700;font-size:.88rem;text-decoration:none;">Napisz opinię →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="sec-inner">
+    <div class="sec-tag reveal">FAQ</div>
+    <h2 class="sec-title reveal">Najczęstsze pytania</h2>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q"><span>Jak szybko mogę się spodziewać przyjazdu pomocy drogowej?</span><span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Gwarantujemy przyjazd w ciągu <strong>15 minut</strong> (wyjeżdżamy w max. 5 minut od zgłoszenia). Średni czas dojazdu wynosi 10 minut.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Co zrobić, jeśli moje auto nie chce odpalić?</span><span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">W większości przypadków uruchamiamy pojazd na miejscu. Mamy przenośne urządzenia rozruchowe, profesjonalne przewody oraz tester akumulatora. Możemy też dowieźć paliwo.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Czy holowanie samochodu nie spowoduje uszkodzeń pojazdu?</span><span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Holowanie przy użyciu naszych lawet jest całkowicie bezpieczne. Korzystamy z certyfikowanych haków i pasów mocujących <strong>Kinedyne</strong>. Każdy pojazd jest ubezpieczony w PZU.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Czy mogę od razu otrzymać fakturę na firmę?</span><span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Tak, zawsze wystawiamy paragony lub faktury VAT na miejscu. W przypadku współpracy z towarzystwami ubezpieczeniowymi oferujemy rozliczenie bezgotówkowe w ramach polis assistance.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Co zrobić, jeśli potrzebuję transportu do warsztatu?</span><span class="faq-arrow">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Oferujemy kompleksowy transport pojazdów niezależnie od odległości — na terenie Katowic i całej Polski. Koszt uzgadniamy przed transportem, bez niespodzianek.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section style="background:var(--gray);" id="kontakt">
+  <div class="sec-inner">
+    <div class="sec-tag reveal">Kontakt</div>
+    <h2 class="sec-title reveal">Skontaktuj się z nami</h2>
+    <p class="sec-sub reveal">Zaufaj doświadczeniu i rzetelności naszych specjalistów. Działamy szybko i skutecznie.</p>
+    <div class="contact-grid reveal" style="grid-template-columns:1fr;max-width:700px;">
+      <div>
+        <div class="contact-cards">
+          <div class="cc">
+            <div class="cc-icon">📞</div>
+            <div><div class="cc-label">Telefon</div><div class="cc-val"><a href="tel:+48500505804">+48 500 505 804</a></div><div class="cc-sub">Odbieramy natychmiast, całą dobę</div></div>
+          </div>
+          <div class="cc">
+            <div class="cc-icon">✉</div>
+            <div><div class="cc-label">E-mail</div><div class="cc-val"><a href="mailto:auto.komis@poczta.fm">auto.komis@poczta.fm</a></div></div>
+          </div>
+          <div class="cc">
+            <div class="cc-icon">📍</div>
+            <div><div class="cc-label">Adres</div><div class="cc-val"><a href="https://maps.app.goo.gl/h6cKEcqXu4aTB3WZ9" target="_blank">al. Walentego Roździeńskiego 170<br>40-203 Katowice</a></div></div>
+          </div>
+          <div class="hours-card">
+            <div class="hours-title">Godziny pracy</div>
+            <div class="h-row always"><span>🟢 Pomoc drogowa</span><span><span class="badge-247">24/7</span></span></div>
+            <div class="h-row always"><span>Czynni codziennie</span><span>całą dobę</span></div>
+          </div>
+        </div>
+        <div class="map-wrap">
+          <iframe src="https://maps.google.com/maps?q=al.%20Walentego%20Ro%C5%BAdzie%C5%84skiego%20170%2C%2040-203%20Katowice&t=m&z=14&output=embed&iwloc=near" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-bottom">
+  <h2>Zainteresowała Cię<br>nasza oferta?</h2>
+  <p>Skontaktuj się z nami, aby omówić szczegóły i uzyskać szybką pomoc. Działamy szybko i skutecznie.</p>
+  <a href="tel:+48500505804" class="btn-white">📞 Zadzwoń: 500 505 804</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo"><span>SOS</span>AutoPomoc</div>
+        <p>Usługi pomocy drogowej w Katowicach i okolicach. Ponad 25 lat doświadczenia, pełne ubezpieczenie i certyfikowany sprzęt.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="#oferta">Oferta</a></li>
+          <li><a href="#o-firmie">O firmie</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#opinie">Opinie</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Informacje</h4>
+        <ul>
+          <li><a href="#faq">Najczęstsze pytania</a></li>
+          <li><a href="https://aplikacja.ceidg.gov.pl/ceidg/ceidg.public.ui/SearchDetails.aspx?Id=79fcaaa9-9bf5-4f3e-b482-2931036f177e" target="_blank">Podmiot odpowiedzialny</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="tel:+48500505804">+48 500 505 804</a></li>
+          <li><a href="mailto:auto.komis@poczta.fm">auto.komis@poczta.fm</a></li>
+          <li><a href="https://maps.app.goo.gl/h6cKEcqXu4aTB3WZ9" target="_blank">al. W. Roździeńskiego 170, Katowice</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 SOSAutoPomoc.pl — Wszelkie prawa zastrzeżone</p>
+      <p>RAFAŁ BOROŃCZYK · NIP dostępny na żądanie</p>
+    </div>
+  </div>
+</footer>
+
+<!-- COOKIE -->
+<div class="cookie" id="cookie">
+  <p>Ta strona korzysta z ciasteczek aby świadczyć usługi na najwyższym poziomie.</p>
+  <button class="cookie-btn" onclick="document.getElementById('cookie').style.display='none'">Zgoda</button>
+</div>
+
+<script>
+/* Dropdown nav */
+document.querySelectorAll('.nav-menu-item').forEach(item=>{
+  const btn = item.querySelector('.nav-menu-btn');
+  btn.addEventListener('click', e=>{
+    e.stopPropagation();
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.nav-menu-item').forEach(i=>i.classList.remove('open'));
+    if(!isOpen) item.classList.add('open');
+  });
+});
+document.addEventListener('click', ()=>document.querySelectorAll('.nav-menu-item').forEach(i=>i.classList.remove('open')));
+
+/* Dropdown links close on click */
+document.querySelectorAll('.dropdown a').forEach(a=>{
+  a.addEventListener('click',()=>document.querySelectorAll('.nav-menu-item').forEach(i=>i.classList.remove('open')));
+});
+
+/* FAQ */
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.parentElement;
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!isOpen) item.classList.add('open');
+  });
+});
+
+/* Offer accordion */
+document.querySelectorAll('.ob-head').forEach(head=>{
+  head.addEventListener('click',()=>{
+    const ob=head.parentElement;
+    ob.classList.toggle('open');
+  });
+});
+
+/* Open the matching offer block when a nav link targets it directly */
+function openOfferTarget(hash){
+  if(!hash) return;
+  const target=document.querySelector(hash);
+  if(target && target.classList.contains('ob')){
+    document.querySelectorAll('.ob').forEach(o=>o.classList.remove('open'));
+    target.classList.add('open');
+  }
+}
+document.querySelectorAll('a[href^="#ob-"]').forEach(a=>{
+  a.addEventListener('click',()=>{
+    setTimeout(()=>openOfferTarget(a.getAttribute('href')), 50);
+  });
+});
+if(location.hash) openOfferTarget(location.hash);
+
+/* Scroll reveal */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); }});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
